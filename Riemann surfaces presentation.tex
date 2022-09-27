@@ -1,0 +1,194 @@
+\documentclass{beamer}
+\mode<presentation>
+\usetheme{boxes}
+\usepackage{graphicx, epstopdf}
+\usepackage{amsmath, amsthm, amssymb, amsfonts, mathrsfs}
+
+\newcommand{\n}{\newline\newline}
+\newcommand{\inv}{^{-1}}
+\newcommand{\g}[1]{\left\langle #1\right\rangle}
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\mb}{\begin{pmatrix}}
+\newcommand{\me}{\end{pmatrix}}
+\newcommand{\lap}{\mathcal{L}}
+\newcommand{\Int}{\operatorname{Int}}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\rk}{\operatorname{rank}}
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\ol}{\overline}
+\newcommand{\czo}{C([0, 1])}
+\newcommand{\rtwo}{\mathbb{R}^2}
+\newcommand{\nd}{^{(n)}}
+\newcommand{\lsn}{\lim_{n\rightarrow\infty}}
+\newcommand{\lsk}{\lim_{k\rightarrow\infty}}
+\newcommand{\lsm}{\lim_{m\rightarrow\infty}}
+\newcommand{\rbs}{\ell^\infty(\mathbb{N})}
+\newcommand{\cui}{C([0, 1])}
+\newcommand{\iui}{\int_0^1}
+\newcommand{\ra}{\rightarrow}
+\newcommand{\rs}{\mathbb{R}}
+\newcommand{\ns}{\mathbb{N}}
+\newcommand{\cs}{\mathbb{C}}
+\newcommand{\qs}{\mathbb{Q}}
+\newcommand{\fs}{\mathbb{F}}
+\newcommand{\zs}{\mathbb{Z}}
+\newcommand{\tl}{\triangleleft}
+
+\title{Riemann surfaces as components of a sheaf of germs of analytic functions}
+\author{David Bass}
+\date{26 September 2022}
+
+\begin{document}
+	
+	\begin{frame}
+		\titlepage
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Acknowledgments}
+		To Shunyu Wan for being an amazing mentor.
+		\vskip0.05in
+		To Professor Peter Humphries, Professor Sara Maloni, Valentina Zapata Castro, and Alec Traaseth for organizing the Directed Reading Program.
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Introduction}
+		In this presentation, we will present an unconventional definition of Riemann surfaces, objects studied in complex analysis, that draws from the theory of topological spaces called sheaves. We contrast this definition of Riemann surfaces as components of the sheaf $\mathscr S(\cs)$ with the classical definition of Riemann surfaces as smooth complex manifolds of complex dimension one (Griffiths 1989).
+		\vskip0.2in
+		All statements not cited are from Conway (1978).
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Riemann surfaces, conventionally}
+		Why do we care? Riemann surfaces are of interest in complex analysis and have applications in string theory (Kim, 2017).
+		\vskip0.2in
+		Griffiths (1989) defines a Riemann surface as a smooth complex manifold of complex dimension one. The complex numbers have real dimension two (hence the complex \textit{plane}), so Riemann surfaces fit our traditional notion of two-dimensional surfaces, but with additional structure that enables performing complex analysis on them.
+		\vskip0.2in
+		Examples of Riemann surfaces include the complex plane itself, the Riemann sphere, and a torus with two missing points. All Riemann surfaces are orientable, so the M{\"o}bius strip, Klein bottle, and real projective plane are notably not Riemann surfaces (Teleman, 2003).
+	\end{frame}
+
+	\section{Following Conway}
+	\begin{frame}
+		\frametitle{Analyticity}
+		\textbf{Definition.} For an open set $G \subset \cs$, a function $f : G \ra \cs$ is \textbf{analytic} if it is continuously differentiable on $G$.
+		\vskip0.2in
+		Many sources use the word ``holomorphic" where we will use ``analytic." For our purposes, they are synonymous.
+		\vskip0.2in
+		Note that we can only define a function to be analytic on an open set. There is no immediate notion of a function that is analytic at a single point.
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Function elements and germs}
+		\textbf{Definition.} We define a \textbf{function element} to be an ordered pair of the form $(f, G)$, where $f : G \ra \cs$ is analytic. 
+		\vskip0.2in
+		\textbf{Definition.} For a function element $(f, G)$ and a point $a \in G$, we define \textbf{the germ of $\boldsymbol f$ at $\boldsymbol a$}, denoted $[f]_a$, to be the collection of all function elements $(g, D)$, where $D$ is an open set containing $a$ and $f \equiv g$ in some neighborhood of $a$.
+		\vskip0.2in
+		Germs provide us with a well-defined notion of the analyticity of a function at a single point.
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Paths in $\cs$}
+		\textbf{Definition.} Let $\gamma:[0, 1]\ra\cs$ be a continuous function. We define the \textbf{path} $\boldsymbol{\gamma}$ to be the image $\gamma([0, 1])$.
+		\vskip0.2in
+		This conflation of $\gamma$ as a function and $\gamma$ as a path is intentional and will not cause any issues down the road.
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Analytic continuation, roughly}
+		Analytic continuation is a method of extending an analytic function to be defined over a larger domain via paths.
+		\vskip0.2in
+		E.g., analytic continuation allows us to define the Riemann zeta function over $\cs \setminus \{1\}$, giving notoriously counterintuitive results, like $\zeta(-1) = \sum_{n=1}^\infty n = -\frac 1 {12}$ and $\zeta(0) = \sum_{n=1}^\infty 1 = -\frac 1 2$.
+		\vskip0.2in
+		We can picture extending a function between subsets of $\rs$ by taking its graph on the $x$-$y$ plane, and then adding onto it by drawing with chalk at the boundary of its domain. This becomes difficult to conceptualize for analytic functions, whose domains and images both have real dimension two.
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Analytic continuation, formally}
+		\textbf{Definition.} Let $\gamma:[0, 1]\ra\cs$ be a path. Suppose that there exists a set of function elements $\{(f_t, D_t) : t\in[0, 1]\}$ such that $\gamma(t)\in D_t$, $\forall t\in [0, 1]$. Suppose that, whenever $|s-t|<\delta$, for some $\delta > 0$, $\gamma(s)\in D_t$ and $[f_s]_{\gamma(s)} = [f_t]_{\gamma(s)}$. We define the \textbf{analytic continuation of} $\boldsymbol{(f_0, D_0)}$ \textbf{along} $\boldsymbol\gamma$ to be $(f_1, D_1)$.
+		\vskip0.2in
+		Here, we use germs to define the analytic continuation of function elements. We can do ourselves one better and define the analytic continuation of germs themselves.
+		\vskip0.2in
+		\textbf{Definition.} Let $\gamma$ be a path from $a$ to $b$. Let the set $\{(f_t, D_t) : t\in[0, 1]\}$ be a set that analytically continues $(f_0, D_0)$ along $\gamma$ to $(f_1, D_1)$. We define the \textbf{analytic continuation of} $\boldsymbol{[f_0]_a}$ \textbf{along} $\boldsymbol\gamma$ to be $[f_1]_b$.
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Existence of analytic continuation}
+		In our discussion of analytic continuation, we make the assumption that analytic continuations exist. To quote Conway, ``Since no degree of generality can be achieved which justifies the effort, no existence theorems for analytic continuations will be proved."
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Complete analytic ``functions"}
+		\textbf{Definition.} Let $(f, G)$ be a function element. We define the  \textbf{complete analytic function obtained from} $\boldsymbol{(f, G)}$ to be the set $\mathscr F$ of all germs $[g]_b$ that are the analytic continuation of $[f]_a$ along $\gamma$, where $a \in G$ and $\gamma$ is a path in $G$ from $a$ to $b$.
+		\vskip0.2in
+		We call $G$ the \textbf{base space of} $\boldsymbol{\mathscr F}$.
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Complete analytic functions}
+		Clearly, a complete analytic function is not actually a function, but we can treat it as such by letting it ``be its own domain." Precisely, we can let $\mathscr R = \{(z, [f]_z) : [f]_z \in \mathscr F\}$ and re-define $\mathscr F : \mathscr R \ra \cs$ by $\mathscr F : (z, [f]_z) \mapsto f(z)$.
+		\vskip0.2in
+		The use of ``$\mathscr R$" here is not coincidental; it will soon stand for ``Riemann surface"!
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Monodromy theorem}
+		\textbf{Theorem.} All analytic continuations of a given germ along fixed-endpoint homotopic paths terminate in the same germ.
+		\vskip0.2in
+		For our purposes, the monodromy theorem gives that our definition of complete analytic functions is unambiguous; we can't get different complete analytic functions from the same function element by choosing different paths along which to perform analytic continuation.
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Sheaves of germs}
+		\textbf{Definition.} For an open set $G \subset \cs$, we define the \textbf{sheaf of germs of analytic functions on} $\boldsymbol G$ to be
+		$\mathscr{S}(G) := \{(z, [f]_z) : z \in G, f \text{ analytic at } z\}$. 
+		\vskip0.2in
+		We define the \textbf{projection map} of $\mathscr S(G)$ to be $\rho : (z, [f]_z) \mapsto z$.
+		\vskip0.2in
+		Note that, for an element $(z, [f]_z)$ to be included in $\mathscr S(G)$, $f$ need not be analytic, or even defined, on all of $G$. Such $f$ only need be analytic in some neighborhood of $z$. From now on, we are concerned with $\mathscr S(\cs)$, which contains an ordered pair for every analytic function at every point in the complex plane.
+		\vskip0.2in
+		Sheaves are topological spaces. This motivates our use of sheaves, as they will grant us immediate access to tools from topology for describing Riemann surfaces.
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Components of $\mathscr S(\cs)$}
+		\textbf{Definition.} A \textbf{component} of a set $X$ is a maximal connected subset of $X$. 
+		\vskip0.2in
+		From the topological structure of $\mathscr S(\cs)$, we can define connectedness, and thus components, of it. We can consider $\mathscr S(\cs)$ as a ``multi-leveled" structure consisting of the graphs of all analytic functions; a component is one of those ``levels," consisting of ordered pairs whose germs coincide, or ``overlap." Each of these components is a surface, as the image of a complex-valued function, and clearly has analytic structure. With some additional structure, each of these components is a Riemann surface.
+		\vskip0.2in
+		``Maximal" analytic continuation of a germ, as formalized by complete analytic functions, yields precisely a component of $\mathscr S(\cs)$.
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Riemann surfaces}
+		\textbf{Definition.} Let $\mathscr F$ be a complete analytic function. Let $\mathscr R = \{(z, [g]_z) : [g]_z \in \mathscr F\}$. Let $\rho$ be the projection map of the sheaf $\mathscr S(\cs)$, i.e. $\rho : (z, [g]_z) \mapsto z$. Then we call $(\mathscr R, \rho)$ the \textbf{Riemann surface of} $\boldsymbol{\mathscr F}$.
+		\vskip0.2in
+		Contrast this definition with ``smooth complex manifolds of complex dimension one."
+		\vskip0.2in
+		$\mathscr R$ is a component of the sheaf $\mathscr S(\cs)$. $\rho(\mathscr R) = G$, the base space of $\mathscr F$. Here, the projection map connects the Riemann surface, which may be geometrically complicated, to the intuitive, ``flat" structure of the complex plane.
+	\end{frame}
+	
+	\begin{frame}
+		\frametitle{Works cited}
+		Conway, John B. Functions of One Complex Variable I, 2nd ed. United States, Springer New York, 1978.
+		\vskip0.05in
+		Jost, Jürgen. Compact Riemann surfaces: an introduction to contemporary mathematics. Germany, Springer, 1997.
+		\vskip0.05in
+		Kim, H., Razamat, S. S., Vafa, C., Zafrir, G., Fortschr. Phys. 2017, 66, 1700074. https://doi.org/10.1002/prop.201700074
+		\vskip0.05in
+		P. A. Griffiths: Introduction to Algebraic Curves, AMS Translations of
+		Math. Monographs 76 1989.
+		\vskip0.05in
+		Teleman, Constantin. Riemann Surfaces. 2003. https://math.berkeley.edu/~teleman/math/Riemann.pdf
+	\end{frame}
+
+	\begin{frame}
+		\frametitle{Conclusion}
+		We explored alternate conceptions of analytic functions via function elements, germs, and complete analytic functions.
+		\vskip0.2in
+		We described how analytic continuation can be used to extend analytic functions to entire components of the sheaf $\mathscr S(\cs)$.
+		\vskip0.2in
+		We defined Riemann surfaces as components of $\mathscr S(\cs)$, together with a projection map, elucidating the topological structure of objects that are typically defined as manifolds.
+	\end{frame}
+	
+\end{document}
+
